@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Example Corp",
+    "location": "New York, NY",
+    "industry": "Technology",
+    "ndiScore": 85,
+    "reviews": [
+      {
+        "user": "John Doe",
+        "rating": 4,
+        "comment": "Great accommodations for neurodivergent employees."
+      }
+    ],
+    "accommodations": [
+      "Flexible working hours",
+      "Quiet workspaces"
+    ]
+  }
+]
