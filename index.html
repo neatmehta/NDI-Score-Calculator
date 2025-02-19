@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDI Score Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        fieldset {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+        .instruction {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+        /* New CSS for Business Profiles Section */
+        #business-profiles {
+            margin-top: 40px;
+        }
+        .business-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+        .business-item h3 {
+            margin-top: 0;
+        }
+        .business-item ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .business-item ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Neurodivergent-Inclusiveness Score (NDI Score)</h1>
+    <div class="instruction">
+        Please enter a score or rate each criterion from 0 to 5. The calculator will compute the Neurodivergent-Inclusiveness (NDI) Score based on your inputs.
+    </div>
+    <form id="ndiForm">
+        <!-- Workplace Policies and Culture -->
+        <fieldset>
+            <legend>Workplace Policies and Culture (25%)</legend>
+            <label for="inclusiveHiring">Inclusive Hiring Practices (6%):</label>
+            <input type="number" id="inclusiveHiring" min="0" max="5" required>
+            
+            <label for="employeeDiversity">Employee Diversity (5%):</label>
+            <input type="number" id="employeeDiversity" min="0" max="5" required>
+            
+            <label for="trainingPrograms">Training Programs (5%):</label>
+            <input type="number" id="trainingPrograms" min="0" max="5" required>
+            
+            <label for="accommodationPolicies">Accommodation Policies (6%):</label>
+            <input type="number" id="accommodationPolicies" min="0" max="5" required>
+            
+            <label for="supportNetworks">Support Networks (3%):</label>
+            <input type="number" id="supportNetworks" min="0" max="5" required>
+        </fieldset>
+
+        <!-- Support and Accommodations -->
+        <fieldset>
+            <legend>Support and Accommodations (25%)</legend>
+            <label for="accessibilityWorkspaces">Accessibility of Workspaces (6%):</label>
+            <input type="number" id="accessibilityWorkspaces" min="0" max="5" required>
+            
+            <label for="flexibleWorking">Flexible Working Arrangements (6%):</label>
+            <input type="number" id="flexibleWorking" min="0" max="5" required>
+            
+            <label for="communicationPreferences">Communication Preferences (6%):</label>
+            <input type="number" id="communicationPreferences" min="0" max="5" required>
+            
+            <label for="performanceEvaluation">Performance Evaluation (7%):</label>
+            <input type="number" id="performanceEvaluation" min="0" max="5" required>
+        </fieldset>
+
+        <!-- Engagement and Advancement -->
+        <fieldset>
+            <legend>Engagement and Advancement (20%)</legend>
+            <label for="careerDevelopment">Career Development (7%):</label>
+            <input type="number" id="careerDevelopment" min="0" max="5" required>
+            
+            <label for="feedbackMechanisms">Feedback Mechanisms (7%):</label>
+            <input type="number" id="feedbackMechanisms" min="0" max="5" required>
+            
+            <label for="inclusionDecisionMaking">Inclusion in Decision-Making (6%):</label>
+            <input type="number" id="inclusionDecisionMaking" min="0" max="5" required>
+        </fieldset>
+
+        <!-- External Representation and Advocacy -->
+        <fieldset>
+            <legend>External Representation and Advocacy (15%)</legend>
+            <label for="communityEngagement">Community Engagement (5%):</label>
+            <input type="number" id="communityEngagement" min="0" max="5" required>
+            
+            <label for="transparency">Transparency (5%):</label>
+            <input type="number" id="transparency" min="0" max="5" required>
+            
+            <label for="supplierPolicies">Supplier and Partner Policies (5%):</label>
+            <input type="number" id="supplierPolicies" min="0" max="5" required>
+        </fieldset>
+
+        <!-- Feedback and Improvement -->
+        <fieldset>
+            <legend>Feedback and Improvement (15%)</legend>
+            <label for="continuousImprovement">Continuous Improvement (5%):</label>
+            <input type="number" id="continuousImprovement" min="0" max="5" required>
+            
+            <label for="employeeSatisfaction">Employee Satisfaction (5%):</label>
+            <input type="number" id="employeeSatisfaction" min="0" max="5" required>
+            
+            <label for="externalReviews">External Reviews (5%):</label>
+            <input type="number" id="externalReviews" min="0" max="5" required>
+        </fieldset>
+
+        <button type="submit">Calculate NDI Score</button>
+    </form>
+
+    <div id="result" class="result">
+        <h2>NDI Score: <span id="scoreValue">0</span>/100</h2>
+    </div>
+
+    <!-- New Section for Business Profiles -->
+    <div id="business-profiles">
+        <h2>Business Profiles</h2>
+        <div id="business-list">
+            <!-- Business profiles will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('ndiForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Define weights for each criterion
+            const weights = {
+                inclusiveHiring: 6,
+                employeeDiversity: 5,
+                trainingPrograms: 5,
+                accommodationPolicies: 6,
+                supportNetworks: 3,
+                accessibilityWorkspaces: 6,
+                flexibleWorking: 6,
+                communicationPreferences: 6,
+                performanceEvaluation: 7,
+                careerDevelopment: 7,
+                feedbackMechanisms: 7,
+                inclusionDecisionMaking: 6,
+                communityEngagement: 5,
+                transparency: 5,
+                supplierPolicies: 5,
+                continuousImprovement: 5,
+                employeeSatisfaction: 5,
+                externalReviews: 5
+            };
+
+            // Calculate weighted score
+            let totalScore = 0;
+            for (const [key, weight] of Object.entries(weights)) {
+                const inputElement = document.getElementById(key);
+                const score = parseFloat(inputElement.value) || 0; // Default to 0 if input is empty
+                console.log(`Key: ${key}, Score: ${score}, Weight: ${weight}`); // Debugging
+                totalScore += score * weight;
+            }
+
+            console.log(`Total Score: ${totalScore}`); // Debugging
+
+            // Normalize to a score out of 100
+            const maxPossibleScore = 100; // Sum of all weights
+            const ndiScore = (totalScore / maxPossibleScore) * 100;
+
+            console.log(`NDI Score: ${ndiScore}`); // Debugging
+
+            // Display the result
+            document.getElementById('scoreValue').textContent = ndiScore.toFixed(2);
+        });
+
+        // Fetch and display business profiles
+        function loadBusinessProfiles() {
+            fetch('./data/businessProfiles.json')
+                .then(response => response.json())
+                .then(data => {
+                    const businessList = document.getElementById('business-list');
+                    data.forEach(business => {
+                        const businessItem = document.createElement('div');
+                        businessItem.classList.add('business-item');
+                        businessItem.innerHTML = `
+                            <h3>${business.name}</h3>
+                            <p><strong>Location:</strong> ${business.location}</p>
+                            <p><strong>Industry:</strong> ${business.industry}</p>
+                            <p><strong>NDI Score:</strong> ${business.ndiScore}</p>
+                            <p><strong>Accommodations:</strong> ${business.accommodations.join(', ')}</p>
+                            <h4>Reviews:</h4>
+                            <ul>
+                                ${business.reviews.map(review => `
+                                    <li>
+                                        <strong>${review.user}</strong> (Rating: ${review.rating}/5):
+                                        ${review.comment}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        `;
+                        businessList.appendChild(businessItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading business profiles:', error);
+                });
+        }
+
+        // Load business profiles when the page loads
+        window.onload = function () {
+            loadBusinessProfiles();
+        };
+    </script>
+</body>
+</html>
