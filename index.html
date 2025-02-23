@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NDI Score Calculator</title>
+  <style>
+    /* ====== Existing styles for NDI Score ====== */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    fieldset {
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    legend {
+      font-weight: bold;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.5em;
+    }
+    .instruction {
+      margin-bottom: 20px;
+      font-size: 1.1em;
+      color: #555;
+    }
+    /* ====== New CSS for employee rating section ====== */
+    .rating-section {
+      margin-top: 40px;
+    }
+    .rating-section h2 {
+      color: #2c3e50;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    /* ====== New CSS for Business Profiles section ====== */
+    #business-profiles {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #business-profiles h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    .business-item {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #fff;
+    }
+    .business-item h3 {
+      margin-top: 0;
+    }
+    .business-item p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Neurodivergent-Inclusiveness Score (NDI Score)</h1>
+  <div class="instruction">
+    Please enter a score or rate each criterion from 0 to 5. The calculator will compute the Neurodivergent-Inclusiveness (NDI) Score based on your inputs.
+  </div>
+
+  <!-- ===================== NDI Score Form ===================== -->
+  <form id="ndiForm">
+    <!-- Workplace Policies and Culture -->
+    <fieldset>
+      <legend>Workplace Policies and Culture (25%)</legend>
+      <label for="inclusiveHiring">Inclusive Hiring Practices (6%):</label>
+      <input type="number" id="inclusiveHiring" min="0" max="5" required>
+      
+      <label for="employeeDiversity">Employee Diversity (5%):</label>
+      <input type="number" id="employeeDiversity" min="0" max="5" required>
+      
+      <label for="trainingPrograms">Training Programs (5%):</label>
+      <input type="number" id="trainingPrograms" min="0" max="5" required>
+      
+      <label for="accommodationPolicies">Accommodation Policies (6%):</label>
+      <input type="number" id="accommodationPolicies" min="0" max="5" required>
+      
+      <label for="supportNetworks">Support Networks (3%):</label>
+      <input type="number" id="supportNetworks" min="0" max="5" required>
+    </fieldset>
+
+    <!-- Support and Accommodations -->
+    <fieldset>
+      <legend>Support and Accommodations (25%)</legend>
+      <label for="accessibilityWorkspaces">Accessibility of Workspaces (6%):</label>
+      <input type="number" id="accessibilityWorkspaces" min="0" max="5" required>
+      
+      <label for="flexibleWorking">Flexible Working Arrangements (6%):</label>
+      <input type="number" id="flexibleWorking" min="0" max="5" required>
+      
+      <label for="communicationPreferences">Communication Preferences (6%):</label>
+      <input type="number" id="communicationPreferences" min="0" max="5" required>
+      
+      <label for="performanceEvaluation">Performance Evaluation (7%):</label>
+      <input type="number" id="performanceEvaluation" min="0" max="5" required>
+    </fieldset>
+
+    <!-- Engagement and Advancement -->
+    <fieldset>
+      <legend>Engagement and Advancement (20%)</legend>
+      <label for="careerDevelopment">Career Development (7%):</label>
+      <input type="number" id="careerDevelopment" min="0" max="5" required>
+      
+      <label for="feedbackMechanisms">Feedback Mechanisms (7%):</label>
+      <input type="number" id="feedbackMechanisms" min="0" max="5" required>
+      
+      <label for="inclusionDecisionMaking">Inclusion in Decision-Making (6%):</label>
+      <input type="number" id="inclusionDecisionMaking" min="0" max="5" required>
+    </fieldset>
+
+    <!-- External Representation and Advocacy -->
+    <fieldset>
+      <legend>External Representation and Advocacy (15%)</legend>
+      <label for="communityEngagement">Community Engagement (5%):</label>
+      <input type="number" id="communityEngagement" min="0" max="5" required>
+      
+      <label for="transparency">Transparency (5%):</label>
+      <input type="number" id="transparency" min="0" max="5" required>
+      
+      <label for="supplierPolicies">Supplier and Partner Policies (5%):</label>
+      <input type="number" id="supplierPolicies" min="0" max="5" required>
+    </fieldset>
+
+    <!-- Feedback and Improvement -->
+    <fieldset>
+      <legend>Feedback and Improvement (15%)</legend>
+      <label for="continuousImprovement">Continuous Improvement (5%):</label>
+      <input type="number" id="continuousImprovement" min="0" max="5" required>
+      
+      <label for="employeeSatisfaction">Employee Satisfaction (5%):</label>
+      <input type="number" id="employeeSatisfaction" min="0" max="5" required>
+      
+      <label for="externalReviews">External Reviews (5%):</label>
+      <input type="number" id="externalReviews" min="0" max="5" required>
+    </fieldset>
+
+    <button type="submit">Calculate NDI Score</button>
+  </form>
+
+  <div id="result" class="result">
+    <h2>NDI Score: <span id="scoreValue">0</span>/100</h2>
+  </div>
+
+  <!-- ================== New Employee Rating Section ================== -->
+  <div class="rating-section">
+    <h2>Rate Your Workplace</h2>
+    <p>As an employee, your feedback is valuable in helping us improve workplace inclusivity. Please rate your workplace below.</p>
+    
+    <form id="employeeRatingForm">
+      <!-- Workplace Policies and Culture -->
+      <fieldset>
+        <legend>Workplace Policies and Culture (25%)</legend>
+        <div class="form-group">
+          <label for="employeeInclusiveHiring">Inclusive Hiring Practices (6%):</label>
+          <input type="number" id="employeeInclusiveHiring" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeDiversity">Employee Diversity (5%):</label>
+          <input type="number" id="employeeDiversity" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeTrainingPrograms">Training Programs (5%):</label>
+          <input type="number" id="employeeTrainingPrograms" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeAccommodationPolicies">Accommodation Policies (6%):</label>
+          <input type="number" id="employeeAccommodationPolicies" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeSupportNetworks">Support Networks (3%):</label>
+          <input type="number" id="employeeSupportNetworks" min="0" max="5" required>
+        </div>
+      </fieldset>
+
+      <!-- Support and Accommodations -->
+      <fieldset>
+        <legend>Support and Accommodations (25%)</legend>
+        <div class="form-group">
+          <label for="employeeAccessibilityWorkspaces">Accessibility of Workspaces (6%):</label>
+          <input type="number" id="employeeAccessibilityWorkspaces" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeFlexibleWorking">Flexible Working Arrangements (6%):</label>
+          <input type="number" id="employeeFlexibleWorking" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeCommunicationPreferences">Communication Preferences (6%):</label>
+          <input type="number" id="employeeCommunicationPreferences" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeePerformanceEvaluation">Performance Evaluation (7%):</label>
+          <input type="number" id="employeePerformanceEvaluation" min="0" max="5" required>
+        </div>
+      </fieldset>
+
+      <!-- Engagement and Advancement -->
+      <fieldset>
+        <legend>Engagement and Advancement (20%)</legend>
+        <div class="form-group">
+          <label for="employeeCareerDevelopment">Career Development (7%):</label>
+          <input type="number" id="employeeCareerDevelopment" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeFeedbackMechanisms">Feedback Mechanisms (7%):</label>
+          <input type="number" id="employeeFeedbackMechanisms" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeInclusionDecisionMaking">Inclusion in Decision-Making (6%):</label>
+          <input type="number" id="employeeInclusionDecisionMaking" min="0" max="5" required>
+        </div>
+      </fieldset>
+
+      <!-- External Representation and Advocacy -->
+      <fieldset>
+        <legend>External Representation and Advocacy (15%)</legend>
+        <div class="form-group">
+          <label for="employeeCommunityEngagement">Community Engagement (5%):</label>
+          <input type="number" id="employeeCommunityEngagement" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeTransparency">Transparency (5%):</label>
+          <input type="number" id="employeeTransparency" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeSupplierPolicies">Supplier and Partner Policies (5%):</label>
+          <input type="number" id="employeeSupplierPolicies" min="0" max="5" required>
+        </div>
+      </fieldset>
+
+      <!-- Feedback and Improvement -->
+      <fieldset>
+        <legend>Feedback and Improvement (15%)</legend>
+        <div class="form-group">
+          <label for="employeeContinuousImprovement">Continuous Improvement (5%):</label>
+          <input type="number" id="employeeContinuousImprovement" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeSatisfaction">Employee Satisfaction (5%):</label>
+          <input type="number" id="employeeSatisfaction" min="0" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="employeeExternalReviews">External Reviews (5%):</label>
+          <input type="number" id="employeeExternalReviews" min="0" max="5" required>
+        </div>
+      </fieldset>
+
+      <button type="submit">Submit Rating</button>
+    </form>
+  </div>
+
+  <!-- ================== Business Profiles Section ================== -->
+  <div id="business-profiles">
+    <h2>Business Profiles</h2>
+    <div id="business-list">
+      <!-- Business profiles will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <script>
+    // ================== NDI Score Form Logic ======================
+    document.getElementById('ndiForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Define weights for each criterion
+      const weights = {
+        inclusiveHiring: 6,
+        employeeDiversity: 5,
+        trainingPrograms: 5,
+        accommodationPolicies: 6,
+        supportNetworks: 3,
+        accessibilityWorkspaces: 6,
+        flexibleWorking: 6,
+        communicationPreferences: 6,
+        performanceEvaluation: 7,
+        careerDevelopment: 7,
+        feedbackMechanisms: 7,
+        inclusionDecisionMaking: 6,
+        communityEngagement: 5,
+        transparency: 5,
+        supplierPolicies: 5,
+        continuousImprovement: 5,
+        employeeSatisfaction: 5,
+        externalReviews: 5
+      };
+
+      // Calculate raw weighted score
+      let totalScore = 0;
+      for (const [key, weight] of Object.entries(weights)) {
+        const inputElement = document.getElementById(key);
+        const score = parseFloat(inputElement.value) || 0;
+        totalScore += score * weight;
+      }
+
+      // Because the sum of weights is 100 and each input can be max 5,
+      // the maximum raw score is 5 * 100 = 500.
+      // Convert to a 0–100 scale:
+      const maxPossibleScore = 5 * 100;
+      const ndiScore = (totalScore / maxPossibleScore) * 100;
+
+      document.getElementById('scoreValue').textContent = ndiScore.toFixed(2);
+    });
+
+    // =============== Employee Rating Form Submission ==============
+    document.getElementById('employeeRatingForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Gather employee rating data from the form
+      const employeeRatings = {
+        employeeInclusiveHiring: document.getElementById('employeeInclusiveHiring').value,
+        employeeDiversity: document.getElementById('employeeDiversity').value,
+        employeeTrainingPrograms: document.getElementById('employeeTrainingPrograms').value,
+        employeeAccommodationPolicies: document.getElementById('employeeAccommodationPolicies').value,
+        employeeSupportNetworks: document.getElementById('employeeSupportNetworks').value,
+        employeeAccessibilityWorkspaces: document.getElementById('employeeAccessibilityWorkspaces').value,
+        employeeFlexibleWorking: document.getElementById('employeeFlexibleWorking').value,
+        employeeCommunicationPreferences: document.getElementById('employeeCommunicationPreferences').value,
+        employeePerformanceEvaluation: document.getElementById('employeePerformanceEvaluation').value,
+        employeeCareerDevelopment: document.getElementById('employeeCareerDevelopment').value,
+        employeeFeedbackMechanisms: document.getElementById('employeeFeedbackMechanisms').value,
+        employeeInclusionDecisionMaking: document.getElementById('employeeInclusionDecisionMaking').value,
+        employeeCommunityEngagement: document.getElementById('employeeCommunityEngagement').value,
+        employeeTransparency: document.getElementById('employeeTransparency').value,
+        employeeSupplierPolicies: document.getElementById('employeeSupplierPolicies').value,
+        employeeContinuousImprovement: document.getElementById('employeeContinuousImprovement').value,
+        employeeSatisfaction: document.getElementById('employeeSatisfaction').value,
+        employeeExternalReviews: document.getElementById('employeeExternalReviews').value
+      };
+
+      // Right now, we just console.log the data or show an alert.
+      // You can replace this with an AJAX call or fetch() to send data to your backend.
+      console.log("Employee Rating Data:", employeeRatings);
+      alert("Thank you for your feedback! Your rating has been submitted.");
+    });
+
+    // =============== Load Business Profiles ==================
+    function loadBusinessProfiles() {
+      fetch('./data/businessProfiles.json')
+        .then(response => response.json())
+        .then(data => {
+          const businessList = document.getElementById('business-list');
+          data.forEach(business => {
+            const businessItem = document.createElement('div');
+            businessItem.classList.add('business-item');
+            businessItem.innerHTML = `
+              <h3>${business.name}</h3>
+              <p><strong>Location:</strong> ${business.location}</p>
+              <p><strong>Industry:</strong> ${business.industry}</p>
+              <p><strong>NDI Score:</strong> ${business.ndiScore}</p>
+              <p><strong>Accommodations:</strong> ${business.accommodations.join(', ')}</p>
+              <h4>Reviews:</h4>
+              <ul>
+                ${business.reviews.map(review => `
